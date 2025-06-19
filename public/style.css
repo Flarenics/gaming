@@ -1,0 +1,48 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #1b222c;
+  color: #ddd;
+}
+#filters {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+#scores-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 15px;
+}
+#scores-table th,
+#scores-table td {
+  border: 1px solid #444;
+  padding: 8px;
+}
+#scores-table th {
+  background-color: #243244;
+}
+button {
+  background-color: #304860;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #3e5a7a;
+}
+input[type="text"], select {
+  padding: 5px;
+  background-color: #2a3340;
+  color: #eee;
+  border: 1px solid #555;
+}
+input[type="range"] {
+  accent-color: #61a0ff;
+}
+label {
+  margin-right: 4px;
+}
