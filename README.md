@@ -1,7 +1,5 @@
 # gaming
 
-Simple Quaver API stats lookup website.
-
 ## Setup
 
 Install dependencies:
