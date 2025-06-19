@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quaver Stats Lookup</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Quaver Stats Lookup</h1>
+<div class="search">
+  <input type="text" id="username" placeholder="Enter username"/>
+  <button id="searchBtn">Search</button>
+  <button id="modeToggle">Mode: 7K</button>
+</div>
+<div id="user-info"></div>
+<div id="filters" style="display:none;">
+  <label for="grade">Grade:</label>
+  <select id="grade">
+    <option value="">Any</option>
+    <option value="X">X</option>
+    <option value="SS">SS</option>
+    <option value="S">S</option>
+    <option value="A">A</option>
+    <option value="B">B</option>
+    <option value="C">C</option>
+    <option value="D">D</option>
+  </select>
+  <label><input type="checkbox" id="rateEnable" checked>Rate:</label>
+  <input type="range" id="rateRange" min="0.5" max="2" step="0.05" value="1" oninput="rateValue.innerText=this.value">
+  <span id="rateValue">1</span>
+  <label for="sort">Sort by:</label>
+  <select id="sort">
+    <option value="combo">Max Combo</option>
+    <option value="performance">Performance</option>
+  </select>
+  <button id="loadBtn">Load Scores</button>
+</div>
+  <table id="scores-table"></table>
+  <button id="showMore" style="display:none;">Show More</button>
+  <script src="app.js"></script>
+</body>
+</html>
