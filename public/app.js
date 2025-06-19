@@ -1,10 +1,21 @@
 let currentUserId = null;
 
-let currentMode = 2; // 7k by default
-let rateEnabled = true;
-let allScores = [];
-let displayIndex = 0;
-const PAGE_SIZE = 10;
+// attach UI listeners once the DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('searchBtn').addEventListener('click', lookupUser);
+  document.getElementById('modeToggle').addEventListener('click', toggleMode);
+  document.getElementById('rateEnable').addEventListener('change', toggleRate);
+  document.getElementById('loadBtn').addEventListener('click', loadScores);
+  document.getElementById('showMore').addEventListener('click', showNext);
+});
+
+  renderScores(true);
+function renderScores(initial = false) {
+  if (initial) {
+    table.innerHTML = '';
+    const header = `<tr><th>Map</th><th>Grade</th><th>Performance</th><th>Max Combo</th><th>Rate</th></tr>`;
+    table.insertAdjacentHTML('beforeend', header);
+  }
 
 function toggleMode() {
   currentMode = currentMode === 2 ? 1 : 2;
