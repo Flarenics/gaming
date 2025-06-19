@@ -10,11 +10,11 @@
 <h1>Quaver Stats Lookup</h1>
 <div class="search">
   <input type="text" id="username" placeholder="Enter username"/>
-  <button onclick="lookupUser()">Search</button>
-  <button id="modeToggle" onclick="toggleMode()">Mode: 7K</button>
-<style>
-body { font-family: Arial, sans-serif; margin: 20px; }
-#scores-table { border-collapse: collapse; width: 100%; }
+  <button id="searchBtn">Search</button>
+  <button id="modeToggle">Mode: 7K</button>
+  <label><input type="checkbox" id="rateEnable" checked>Rate:</label>
+  <button id="loadBtn">Load Scores</button>
+  <button id="showMore" style="display:none;">Show More</button>
 #scores-table th, #scores-table td { border: 1px solid #ddd; padding: 8px; }
 #scores-table th { background-color: #f2f2f2; }
 </style>
