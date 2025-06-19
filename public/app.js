@@ -1,6 +1,9 @@
 let currentUserId = null;
 let currentMode = 2; // 7k by default
 let rateEnabled = true;
+let allScores = [];
+let displayIndex = 0;
+const PAGE_SIZE = 10;
 
 function toggleMode() {
   currentMode = currentMode === 2 ? 1 : 2;
@@ -40,17 +43,31 @@ async function loadScores() {
     params.append('rate', rate);
   }
   const res = await fetch(`/api/user/${currentUserId}/scores?${params.toString()}`);
-  const scores = await res.json();
-  renderScores(scores);
+  allScores = await res.json();
+  displayIndex = 0;
+  renderScores();
 }
 
-function renderScores(scores) {
+function renderScores() {
   const table = document.getElementById('scores-table');
   table.innerHTML = '';
   const header = `<tr><th>Map</th><th>Grade</th><th>Performance</th><th>Max Combo</th><th>Rate</th></tr>`;
   table.insertAdjacentHTML('beforeend', header);
-  for (const s of scores) {
+  for (const s of allScores.slice(displayIndex, displayIndex + PAGE_SIZE)) {
     const row = `<tr><td>${s.map.artist} - ${s.map.title} [${s.map.difficulty_name}]</td><td>${s.grade}</td><td>${s.performance_rating.toFixed(2)}</td><td>${s.max_combo}</td><td>${s.rate}</td></tr>`;
     table.insertAdjacentHTML('beforeend', row);
+  }
+  const showMore = document.getElementById('showMore');
+  if (displayIndex + PAGE_SIZE < allScores.length) {
+    showMore.style.display = 'block';
+  } else {
+    showMore.style.display = 'none';
+  }
+}
+
+function showNext() {
+  if (displayIndex + PAGE_SIZE < allScores.length) {
+    displayIndex += PAGE_SIZE;
+    renderScores();
   }
 }

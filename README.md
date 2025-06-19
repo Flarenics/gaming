@@ -15,3 +15,5 @@ node server.js
 ```
 
 Then open `http://localhost:3000` in your browser.
+
+Scores are displayed 10 at a time. Use the **Show More** button to see additional results.
