@@ -12,6 +12,18 @@
   <input type="text" id="username" placeholder="Enter username"/>
   <button onclick="lookupUser()">Search</button>
   <button id="modeToggle" onclick="toggleMode()">Mode: 7K</button>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; }
+#scores-table { border-collapse: collapse; width: 100%; }
+#scores-table th, #scores-table td { border: 1px solid #ddd; padding: 8px; }
+#scores-table th { background-color: #f2f2f2; }
+</style>
+</head>
+<body>
+<h1>Quaver Stats Lookup</h1>
+<div>
+  <input type="text" id="username" placeholder="Enter username"/>
+  <button onclick="lookupUser()">Search</button>
 </div>
 <div id="user-info"></div>
 <div id="filters" style="display:none;">
@@ -27,6 +39,7 @@
     <option value="D">D</option>
   </select>
   <label><input type="checkbox" id="rateEnable" checked onchange="toggleRate()">Rate:</label>
+  <label for="rateRange">Rate:</label>
   <input type="range" id="rateRange" min="0.5" max="2" step="0.05" value="1" oninput="rateValue.innerText=this.value">
   <span id="rateValue">1</span>
   <label for="sort">Sort by:</label>
@@ -39,5 +52,7 @@
   <table id="scores-table"></table>
   <button id="showMore" style="display:none;" onclick="showNext()">Show More</button>
   <script src="app.js"></script>
+<table id="scores-table"></table>
+<script src="app.js"></script>
 </body>
 </html>

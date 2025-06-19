@@ -1,4 +1,5 @@
 let currentUserId = null;
+
 let currentMode = 2; // 7k by default
 let rateEnabled = true;
 let allScores = [];
@@ -29,6 +30,7 @@ async function lookupUser() {
   currentUserId = user.id;
   document.getElementById('user-info').innerText = `User: ${user.username} (ID: ${user.id})`;
   document.getElementById('filters').style.display = 'flex';
+  document.getElementById('filters').style.display = 'block';
   loadScores();
 }
 
@@ -49,6 +51,16 @@ async function loadScores() {
 }
 
 function renderScores() {
+  const rate = document.getElementById('rateRange').value;
+  const params = new URLSearchParams({ sort });
+  if (grade) params.append('grade', grade);
+  if (rate) params.append('rate', rate);
+  const res = await fetch(`/api/user/${currentUserId}/scores?${params.toString()}`);
+  const scores = await res.json();
+  renderScores(scores);
+}
+
+function renderScores(scores) {
   const table = document.getElementById('scores-table');
   table.innerHTML = '';
   const header = `<tr><th>Map</th><th>Grade</th><th>Performance</th><th>Max Combo</th><th>Rate</th></tr>`;
@@ -69,5 +81,9 @@ function showNext() {
   if (displayIndex + PAGE_SIZE < allScores.length) {
     displayIndex += PAGE_SIZE;
     renderScores();
+  }
+  for (const s of scores) {
+    const row = `<tr><td>${s.map.artist} - ${s.map.title} [${s.map.difficulty_name}]</td><td>${s.grade}</td><td>${s.performance_rating.toFixed(2)}</td><td>${s.max_combo}</td><td>${s.rate}</td></tr>`;
+    table.insertAdjacentHTML('beforeend', row);
   }
 }
