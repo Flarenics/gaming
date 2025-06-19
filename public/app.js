@@ -1,4 +1,18 @@
 let currentUserId = null;
+let currentMode = 2; // 7k by default
+let rateEnabled = true;
+
+function toggleMode() {
+  currentMode = currentMode === 2 ? 1 : 2;
+  document.getElementById('modeToggle').innerText = `Mode: ${currentMode === 2 ? '7K' : '4K'}`;
+  if (currentUserId) loadScores();
+}
+
+function toggleRate() {
+  rateEnabled = document.getElementById('rateEnable').checked;
+  document.getElementById('rateRange').disabled = !rateEnabled;
+  if (currentUserId) loadScores();
+}
 
 async function lookupUser() {
   const name = document.getElementById('username').value.trim();
@@ -11,7 +25,7 @@ async function lookupUser() {
   const user = await res.json();
   currentUserId = user.id;
   document.getElementById('user-info').innerText = `User: ${user.username} (ID: ${user.id})`;
-  document.getElementById('filters').style.display = 'block';
+  document.getElementById('filters').style.display = 'flex';
   loadScores();
 }
 
@@ -19,10 +33,12 @@ async function loadScores() {
   if (!currentUserId) return;
   const grade = document.getElementById('grade').value;
   const sort = document.getElementById('sort').value;
-  const rate = document.getElementById('rateRange').value;
-  const params = new URLSearchParams({ sort });
+  const params = new URLSearchParams({ sort, mode: currentMode });
   if (grade) params.append('grade', grade);
-  if (rate) params.append('rate', rate);
+  if (rateEnabled) {
+    const rate = document.getElementById('rateRange').value;
+    params.append('rate', rate);
+  }
   const res = await fetch(`/api/user/${currentUserId}/scores?${params.toString()}`);
   const scores = await res.json();
   renderScores(scores);

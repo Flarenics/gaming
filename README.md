@@ -1,6 +1,6 @@
 # gaming
 
-Simple Quaver API stats lookup website.
+Simple Quaver API stats lookup website supporting both 4K and 7K modes.
 
 ## Setup
 
